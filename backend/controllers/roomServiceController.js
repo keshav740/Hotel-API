@@ -1,4 +1,4 @@
-const Guest = require("../models/rooomServicModel");
+const Service = require("../models/rooomServicModel");
 
 
 
@@ -46,7 +46,7 @@ exports.updateService = async (req, res, next) => {
         // return next(new ErrorHandler("Item not found ", 404));
         return res.status(500).json({
             success: false,
-            message: "Itme not Found"
+            message: "Room not Found"
         });
     }
     ser1 = await Service.findByIdAndUpdate(req.params.id, req.body, {
@@ -60,3 +60,29 @@ exports.updateService = async (req, res, next) => {
     });
 
 }
+
+
+exports.deleteService = async (req, res, next) => {
+
+    // req.body.student=req.student.id
+    const service = await Service.findById(req.params.id);
+  
+    if (!service) {
+      return next(new ErrorHandler("Service not found ", 404));
+    }
+  
+    // ==========================================================================
+  
+    // another trick to delete one record
+  
+    // await student.deleteOne(req.params.id);
+  
+    //   ===========================================================================
+  
+    await Service.findOneAndDelete();
+  
+    res.status(200).json({
+      success: true,
+      message: "Service delete successfully",
+    });
+  } ;

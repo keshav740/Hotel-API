@@ -1,4 +1,4 @@
-const RoomBooking = require("../models/roomBookingModel");
+const Booking = require("../models/roomBookingModel");
 
 
 
@@ -60,3 +60,28 @@ exports.updateBooking = async (req, res, next) => {
     });
 
 }
+
+exports.deleteBooking = async (req, res, next) => {
+
+    // req.body.student=req.student.id
+    const booking = await Booking.findById(req.params.id);
+  
+    if (!booking) {
+      return next(new ErrorHandler("Booking not found ", 404));
+    }
+  
+    // ==========================================================================
+  
+    // another trick to delete one record
+  
+    // await student.deleteOne(req.params.id);
+  
+    //   ===========================================================================
+  
+    await Booking.findOneAndDelete();
+  
+    res.status(200).json({
+      success: true,
+      message: "Booking delete successfully",
+    });
+  } ;

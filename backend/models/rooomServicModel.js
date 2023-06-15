@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const roomServiceSchema = new mongoose.Schema({
     Service_Name: {
-        type: Number,
+        type: String,
         required: [true, "Please enter your Item Number"],
     },
     Servive_Charge: {

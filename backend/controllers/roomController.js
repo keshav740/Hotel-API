@@ -60,3 +60,29 @@ exports.updateRoom = async (req, res, next) => {
     });
 
 }
+
+
+exports.deleteRoom = async (req, res, next) => {
+
+    // req.body.student=req.student.id
+    const room = await Room.findById(req.params.id);
+  
+    if (!room) {
+      return next(new ErrorHandler("Room not found ", 404));
+    }
+  
+    // ==========================================================================
+  
+    // another trick to delete one record
+  
+    // await student.deleteOne(req.params.id);
+  
+    //   ===========================================================================
+  
+    await Room.findOneAndDelete();
+  
+    res.status(200).json({
+      success: true,
+      message: "Room delete successfully",
+    });
+  } ;

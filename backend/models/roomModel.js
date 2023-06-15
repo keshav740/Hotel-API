@@ -18,18 +18,6 @@ const RoomSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please enter your Item Number"],
         },
-        Image: {
-            public_id: {
-                type: String,
-                required: true,
-            },
-            url: {
-                type: String,
-                required: true,
-            },
-        },
-
-
 });
 
 module.exports = mongoose.model("Room",RoomSchema);
