@@ -60,3 +60,28 @@ exports.updateGuest = async (req, res, next) => {
     });
 
 }
+
+exports.deleteGuest = async (req, res, next) => {
+
+    // req.body.student=req.student.id
+    const guest = await Guest.findById(req.params.id);
+  
+    if (!guest) {
+      return next(new ErrorHandler("Guest not found ", 404));
+    }
+  
+    // ==========================================================================
+  
+    // another trick to delete one record
+  
+    // await student.deleteOne(req.params.id);
+  
+    //   ===========================================================================
+  
+    await Guest.findOneAndDelete();
+  
+    res.status(200).json({
+      success: true,
+      message: "Guest delete successfully",
+    });
+  } ;
